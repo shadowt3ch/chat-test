@@ -278,12 +278,12 @@ end
 local gui = Instance.new("ScreenGui")
 local GazerMain = Instance.new("Frame")
 local GazerTitle = Instance.new("TextLabel")
-local TextBax = Instance.new("TextBox")
+local TextBox = Instance.new("TextBox")
 local chat = Instance.new("TextButton")
 
+gui.Name = "GystBypasser"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") -- Ensure GUI appears
 
-gui.Name = "Gyst bypasser"
-gui.Parent = coreGay
 GazerMain.Size = UDim2.new(0.5, 0, 0.5, 0)
 GazerMain.Position = UDim2.new(0.25, 0, 0.25, 0)
 GazerMain.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -292,6 +292,7 @@ GazerMain.BorderSizePixel = 1
 GazerMain.Active = true
 GazerMain.Draggable = true
 GazerMain.Parent = gui
+
 GazerTitle.Size = UDim2.new(1, 0, 0.2, 0)
 GazerTitle.Position = UDim2.new(0, 0, 0, 0)
 GazerTitle.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -302,17 +303,19 @@ GazerTitle.TextSize = 14
 GazerTitle.TextColor3 = Color3.new(1, 1, 1)
 GazerTitle.Font = Enum.Font.Bodoni
 GazerTitle.Parent = GazerMain
-TextBax.Size = UDim2.new(0.8, 0, 0.2, 0)
-TextBax.Position = UDim2.new(0.1, 0, 0.3, 0)
-TextBax.BackgroundColor3 = Color3.new(0, 0, 0)
-TextBax.BorderColor3 = Color3.new(0, 0, 0)
-TextBax.BorderSizePixel = 1
-TextBax.PlaceholderText = "(Chat)"
-TextBax.TextColor3 = Color3.new(1, 1, 1)
-TextBax.Font = Enum.Font.Code
-TextBax.Text = ""
-TextBax.TextSize = 15
-TextBax.Parent = GazerMain
+
+TextBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
+TextBox.BorderColor3 = Color3.new(0, 0, 0)
+TextBox.BorderSizePixel = 1
+TextBox.PlaceholderText = "(Chat)"
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.Font = Enum.Font.Code
+TextBox.Text = ""
+TextBox.TextSize = 15
+TextBox.Parent = GazerMain
+
 chat.Size = UDim2.new(0.3, 0, 0.2, 0)
 chat.Position = UDim2.new(0.35, 0, 0.7, 0)
 chat.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -324,21 +327,12 @@ chat.TextColor3 = Color3.new(1, 1, 1)
 chat.Font = Enum.Font.Code
 chat.Parent = GazerMain
 
-
-
-
-
-
-
 chat.MouseButton1Click:Connect(function()
-    local inputString = TextBax.Text
-    Bypass(inputString)
-    
+    local inputString = TextBox.Text
+    Bypass(inputString) -- Ensure the Bypass function exists
 end)
 
-
--- Credits: darkpheniox3.
-
+-- Safe load to prevent script errors
 pcall(function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/shadowt3ch/chat-test/main/ui.lua'))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/shadowt3ch/chat-test/main/ui.lua'))()
 end)
