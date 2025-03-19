@@ -1,338 +1,199 @@
 local yapping = true
-
-
-local Gaze = [[
-Gaze Bypass Tutorial:
-"https://youtube.com/shorts/z1yCdkbXTi4?si=f1ol4wCL4jxW3jtP"
-]]
-
-everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-
-
-
+local Gaze = "Gaze Bypass Tutorial: https://youtube.com/shorts/z1yCdkbXTi4?si=f1ol4wCL4jxW3jtP"
 local GazerHa_Cooldown = 0.8
 
+-- Clipboard function compatibility
+local everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
 
-
-
-
+-- Wait for game to load
 if not game:IsLoaded() then
-    game.Loaded:wait()
+	print("Waiting for game to load...")
+	game.Loaded:Wait()
 end
 
+-- Fade text function (optional CoreGui usage)
+local function fadeText(text)
+	local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui", 5)
+	if not playerGui then
+		warn("PlayerGui not found for fade text!")
+		return
+	end
 
-    
-local guiName = "GazeGayUIFemboySexLover"
-local coreGay = cloneref(game:GetService("CoreGui")) or game:GetService("CoreGui")
+	local screenGui = Instance.new("ScreenGui")
+	local label = Instance.new("TextLabel")
+	screenGui.Parent = playerGui -- Changed from CoreGui to PlayerGui
+	label.Parent = screenGui
+	label.Size = UDim2.new(0.5, 0, 0.2, 0)
+	label.Position = UDim2.new(0.3, 0, 0.45, 0)
+	label.BackgroundTransparency = 1
+	label.TextTransparency = 1
+	label.Text = text
+	label.TextColor3 = Color3.new(0, 1, 1)
+	label.TextScaled = true
+	label.Font = Enum.Font.GothamBlack
 
-
-if not coreGay:FindFirstChild(guiName) then
-   
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = guiName  
-
-    
-    screenGui.Parent = coreGay
-
-    print("•   Gaze bypass √ loaded.")
-else
-   
-    print("•   Gaze bypass √ is already executed..")
-    return
+	local tweenService = game:GetService("TweenService")
+	local fadeIn = tweenService:Create(label, TweenInfo.new(GazerHa_Cooldown), {TextTransparency = 0})
+	fadeIn:Play()
+	fadeIn.Completed:Wait()
+	task.wait(GazerHa_Cooldown)
+	local fadeOut = tweenService:Create(label, TweenInfo.new(GazerHa_Cooldown), {TextTransparency = 1})
+	fadeOut:Play()
+	fadeOut.Completed:Wait()
+	screenGui:Destroy()
 end
 
-
-
-local function fadeTextThatMadeByChatGpt(labeltext)
-    local screenGui = Instance.new("ScreenGui")
-    local label = Instance.new("TextLabel") -- Corrected label variable name
-
-    -- Set up the Sloves and Naggers properties
-    screenGui.Parent = coreGay
-    label.Parent = screenGui
-    label.Size = UDim2.new(0.5, 0, 0.2, 0)  
-    label.Position = UDim2.new(0.30, 0, 0.45, 0)  
-    label.BackgroundTransparency = 1
-    label.TextTransparency = 1
-    label.Text = labeltext
-    label.TextColor3 = Color3.new(0, 1, 1)  
-    label.TextScaled = true
-    label.Font = Enum.Font.GothamBlack -- Bold, modern font
-
-    
-    local fadeDuration = GazerHa_Cooldown
-
-    
-    local tweenService = game:GetService("TweenService")
-
-    
-    local fadeIn = tweenService:Create(label, TweenInfo.new(fadeDuration), {TextTransparency = 0})
-    fadeIn:Play()
-    fadeIn.Completed:Wait()
-
-    task.wait(fadeDuration)
-
-    
-    local fadeOut = tweenService:Create(label, TweenInfo.new(fadeDuration), {TextTransparency = 1})
-    fadeOut:Play()
-    fadeOut.Completed:Wait()
-
-    screenGui:Destroy()
-end
-
+-- Initial messages
 if yapping then
-
-fadeTextThatMadeByChatGpt("Made By GazerHa")
-fadeTextThatMadeByChatGpt("ROBLOX STOP PATCHING MY OPEN SOURCED SCRIPT \u{1F62D}")
-fadeTextThatMadeByChatGpt("Unpatched, but its not good as before.")
-
-fadeTextThatMadeByChatGpt("TO MAKE THE BYPASS WORK\nRead Your Clipboard")
-
-everyClipboard(tostring(Gaze))
-task.wait(0.5)
-
-
-fadeTextThatMadeByChatGpt("READ THE TUTORIAL ON YOUR COPY")
+	fadeText("Made By GazerHa")
+	fadeText("ROBLOX STOP PATCHING MY OPEN SOURCED SCRIPT 😭")
+	fadeText("Unpatched, but not as good as before.")
+	fadeText("TO MAKE THE BYPASS WORK\nRead Your Clipboard")
+	if everyClipboard then 
+		everyClipboard(Gaze)
+		print("Clipboard set with tutorial link.")
+	else
+		print("Clipboard function unavailable.")
+	end
+	task.wait(0.5)
+	fadeText("READ THE TUTORIAL ON YOUR COPY")
 end
 
+-- Bypass function
+local function bypass(input)
+	if not input:find(" ") then input = ">" .. input end
 
+	local replacements = {
+		["rape"] = "尺卂ρ乇",
+		["ass"] = "AƧƧ",
+		["fuck"] = "fυcк",
+		["damn"] = "đамп",
+		["sex"] = "sεx",
+		["shit"] = "sнιт",
+		["pornhub"] = "ρoяиhυв",
+		["porn"] = "ρoяи",
+		["bitch"] = "вιтch",
+		["nigga"] = "иιgga",
+		["nigger"] = "иιggeя",
+		["dick"] = "đιcк",
+		["cock"] = "cσcк",
+		["gay"] = "gαy",
+		["pussy"] = "ρυssy",
+		["breast"] = "вяεasт",
+		["kkk"] = "Kƙƙ",
+		["hawk tuah"] = "нawктυaн"
+	}
 
+	local lowerInput = input:lower()
+	for word, replacement in pairs(replacements) do
+		lowerInput = lowerInput:gsub(word, "{" .. replacement .. "}")
+	end
 
+	local result = ""
+	local insideReplaced = false
+	for i = 1, #lowerInput do
+		local char = lowerInput:sub(i, i)
+		if char == "{" then
+			insideReplaced = true
+		elseif char == "}" then
+			insideReplaced = false
+		elseif insideReplaced then
+			result = result .. char
+		else
+			result = result .. char
+			if i % 3 == 0 and i < #lowerInput then
+				result = result .. "\u{200B}"
+			end
+		end
+	end
 
+	result = result:gsub("{", ""):gsub("}", "")
 
-
-
-
--- here
-
-
-
-local function isEmoji(c)
-    local code = utf8.codepoint(c)  
-
-    
-    if (code >= 0x1F600 and code <= 0x1F64F) or  
-       (code >= 0x1F300 and code <= 0x1F5FF) or  
-       (code >= 0x1F680 and code <= 0x1F6FF) or  
-       (code >= 0x1F700 and code <= 0x1F77F) or  
-       (code >= 0x1F900 and code <= 0x1F9FF) or  
-       (code >= 0x2600 and code <= 0x26FF) or    
-       (code >= 0x2700 and code <= 0x27BF) or    
-       (code >= 0x1F1E6 and code <= 0x1F1FF) then 
-        return true  
-    end
-    return false  
+	local textChatService = game:GetService("TextChatService")
+	if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+		local channel = textChatService:FindFirstChild("TextChannels") and textChatService.TextChannels:FindFirstChild("RBXGeneral")
+		if channel then
+			channel:SendAsync(result)
+			print("Message sent via TextChatService: " .. result)
+		else
+			print("RBXGeneral channel not found.")
+		end
+	else
+		local chatEvents = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
+		if chatEvents and chatEvents:FindFirstChild("SayMessageRequest") then
+			chatEvents.SayMessageRequest:FireServer(result, "All")
+			print("Message sent via legacy chat: " .. result)
+		else
+			print("Legacy chat system not found.")
+		end
+	end
 end
 
-
-
-
-local function Bypass(input)
-
-if not string.find(input, " ") then
-        input = ">\b" .. input
-    end
-    
-local replacements = {
-   Rape = “•尺卂 ρ乇”,
-        ass = "•AƧƧ",
-        Ass = "ΛƧƧ",
-        ASS = "AƧƧ",
-        fuck = "f••••••u•c•k•",
-        Fuck = "F••••••u•c•k•",
-        FUCK = "F••••••U•C•K•",
-        damn = "đамп",
-        Damn = "•đамп",
-        DAMN = "•đамп",
-        sex = "s••.e••x",
-        Sex = "S••.••e••x",
-       SEX = "S.••E••X",
-        shit = "•s••••••h•i•t•",
-        Shit = "•S••••••h•i•t•",
-        SHIT = "•S••••••H•I•T•",
-        pornhub = "•p.••••••o•r•n•••h.•••ub•",
-        Pornhub = "•P.••••••o•r•n•••h.•••ub•",
-        porn = "•p.••••••o•r•n•",
-        Porn = "•P.••••••o•r•n•",
-        PORN = "•P.••••••O•R•N•",
-        bitch = "•b•.i•t•••c•h•",
-        Bitch = "•B.•i•t•••c•h•",
-        BITCH = "•вгтсн",
-        nigga = "n•##.•••g•a",
-        nigger = "n•##.•••g•e•r••",
-        Nigga = "ภเﻮﻮa",
-        NIGG
-        NIGGAS = "ภเﻮﻮas",
-        NIGGA = "ภเﻮﻮa",
-        dick = "ďiсж",
-        Cock = "C••••••o.•c•k•",
-        COCK = "C••••••O.•C•K•",
-        gay = "g••••••a•y",
-        Gay = "G••••••a•y",
-        GAY = "GAY",
-        pussy = "p••••u•s.•s••••••y••",
-        Pussy = "P••••u•s.•s••••••y••",
-        PUSSY = "P•USAY",
-        breast = "•b•r••••••.e•a•s•t•",
-        Breast = "•B•r••••••.e•a•s•t•",
-        BREAST ="•B•R••••••.E•A•S•T•",
-        Kkk = "Kƙׁׅ֑ƙׁׅ֑",
-        Hawk tuah = “нawk-тuан”,
-        ["0"] = "\xEF\xBC\x90",
-["1"] = "\xEF\xBC\x91",
-["2"] = "\xEF\xBC\x92",  
-["3"] = "\xEF\xBC\x93",  
-["4"] = "\xEF\xBC\x94",  
-["5"] = "\xEF\xBC\x95",  
-["6"] = "\xEF\xBC\x96", 
-["7"] = "\xEF\xBC\x97", 
-["8"] = "\xEF\xBC\x98",  
-["9"] = "\xEF\xBC\x99",  
-}
-
-    local lowerInput = input:lower()
-
-    
-    for word, replacement in pairs(replacements) do
-        lowerInput = lowerInput:gsub("(%s?)(" .. word .. ")(%s?)", function(before, matched, after)
-            local modifiedReplacement = replacement
-            if before ~= "" then
-                modifiedReplacement = modifiedReplacement
-            end
-            if after ~= "" then
-                modifiedReplacement = modifiedReplacement
-            end
-            return before .. "{" .. modifiedReplacement .. "}" .. after
-        end)
-    end
-
-    
-    local emojiPattern = "[%z\1-\127\194-\244][\128-\191]*"
-    local modifiedInput = lowerInput:gsub(emojiPattern, function(c)
-        if isEmoji(c) then
-            return "{" .. c .. "}"
-        end
-        return c
-    end)
-
-    
-    local result = ""
-    local insideReplacedWord = false
-
-    for i = 1, #modifiedInput do
-        local char = modifiedInput:sub(i, i)
-
-        if char == "{" then
-            insideReplacedWord = true
-        elseif char == "}" then
-            insideReplacedWord = false
-        elseif insideReplacedWord then
-            result = result .. char
-        elseif char == " " then
-        result = result .. "\b"
-    
-        else
-            result = result .. char
-            
-            if i < #modifiedInput and i % 3 == 1 then
-    result = result .. ""
-
-            end
-        end
-    end
-
-    
-    result = result:gsub("{", ""):gsub("}", "")
-        result = result:gsub("•", "\u{0327}")
-    result = result:gsub("I", "ℹ")
-    result = result:gsub("|", "\r")
-
-    
-    result = result:gsub("\u{0327}", "") --[[Remove Again LOLLLL 
-              (Get some furry fandom for ur work roblox)
-                   stepid facebook stalker #ss n**ga gr*y nerdyass delta f*ck"r]]
-    
-    
-
-    
-    local A_1 = result
-    local A_2 = "All"
-
-    if game:GetService("TextChatService"):FindFirstChild("TextChannels") then
-        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(A_1)
-    else
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer( A_1, A_2)
-    end
+-- GUI setup using ScreenGui in PlayerGui
+print("Attempting to create GUI...")
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui", 5)
+if not playerGui then
+	warn("PlayerGui not found! Script cannot proceed.")
+	return
 end
-    
-
-    
-    
-    
-
-
-
-
-
 
 local gui = Instance.new("ScreenGui")
-local GazerMain = Instance.new("Frame")
-local GazerTitle = Instance.new("TextLabel")
-local TextBox = Instance.new("TextBox")
-local chat = Instance.new("TextButton")
-
 gui.Name = "GystBypasser"
-gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui") -- Ensure GUI appears
+gui.ResetOnSpawn = false
+gui.Parent = playerGui
+print("ScreenGui 'GystBypasser' created and parented to PlayerGui.")
 
-GazerMain.Size = UDim2.new(0.5, 0, 0.5, 0)
-GazerMain.Position = UDim2.new(0.25, 0, 0.25, 0)
-GazerMain.BackgroundColor3 = Color3.new(1, 1, 1)
-GazerMain.BorderColor3 = Color3.new(0, 0, 0)
-GazerMain.BorderSizePixel = 1
-GazerMain.Active = true
-GazerMain.Draggable = true
-GazerMain.Parent = gui
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
+mainFrame.Position = UDim2.new(0.25, 0, 0.25, 0)
+mainFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+mainFrame.BorderColor3 = Color3.new(0, 0, 0)
+mainFrame.BorderSizePixel = 1
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = gui
+print("Main frame created.")
 
-GazerTitle.Size = UDim2.new(1, 0, 0.2, 0)
-GazerTitle.Position = UDim2.new(0, 0, 0, 0)
-GazerTitle.BackgroundColor3 = Color3.new(0, 0, 0)
-GazerTitle.BorderColor3 = Color3.new(0, 0, 0)
-GazerTitle.BorderSizePixel = 1
-GazerTitle.Text = "Gaze Bypass (Tutorial needed)"
-GazerTitle.TextSize = 14
-GazerTitle.TextColor3 = Color3.new(1, 1, 1)
-GazerTitle.Font = Enum.Font.Bodoni
-GazerTitle.Parent = GazerMain
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0.2, 0)
+title.BackgroundColor3 = Color3.new(0, 0, 0)
+title.BorderColor3 = Color3.new(0, 0, 0)
+title.Text = "Gaze Bypass (Tutorial needed)"
+title.TextSize = 14
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.Bodoni
+title.Parent = mainFrame
+print("Title label created.")
 
-TextBox.Size = UDim2.new(0.8, 0, 0.2, 0)
-TextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
-TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
-TextBox.BorderColor3 = Color3.new(0, 0, 0)
-TextBox.BorderSizePixel = 1
-TextBox.PlaceholderText = "(Chat)"
-TextBox.TextColor3 = Color3.new(1, 1, 1)
-TextBox.Font = Enum.Font.Code
-TextBox.Text = ""
-TextBox.TextSize = 15
-TextBox.Parent = GazerMain
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+textBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+textBox.BackgroundColor3 = Color3.new(0, 0, 0)
+textBox.BorderColor3 = Color3.new(0, 0, 0)
+textBox.PlaceholderText = "(Chat)"
+textBox.TextColor3 = Color3.new(1, 1, 1)
+textBox.Font = Enum.Font.Code
+textBox.Text = ""
+textBox.TextSize = 15
+textBox.Parent = mainFrame
+print("TextBox created.")
 
-chat.Size = UDim2.new(0.3, 0, 0.2, 0)
-chat.Position = UDim2.new(0.35, 0, 0.7, 0)
-chat.BackgroundColor3 = Color3.new(0, 0, 0)
-chat.BorderColor3 = Color3.new(0, 0, 0)
-chat.BorderSizePixel = 1
-chat.Text = "Chat"
-chat.TextSize = 14
-chat.TextColor3 = Color3.new(1, 1, 1)
-chat.Font = Enum.Font.Code
-chat.Parent = GazerMain
+local chatButton = Instance.new("TextButton")
+chatButton.Size = UDim2.new(0.3, 0, 0.2, 0)
+chatButton.Position = UDim2.new(0.35, 0, 0.7, 0)
+chatButton.BackgroundColor3 = Color3.new(0, 0, 0)
+chatButton.BorderColor3 = Color3.new(0, 0, 0)
+chatButton.Text = "Chat"
+chatButton.TextSize = 14
+chatButton.TextColor3 = Color3.new(1, 1, 1)
+chatButton.Font = Enum.Font.Code
+chatButton.Parent = mainFrame
+print("Chat button created.")
 
-chat.MouseButton1Click:Connect(function()
-    local inputString = TextBox.Text
-    Bypass(inputString) -- Ensure the Bypass function exists
+chatButton.MouseButton1Click:Connect(function()
+	print("Chat button clicked. Input: " .. textBox.Text)
+	bypass(textBox.Text)
 end)
 
--- Safe load to prevent script errors
-pcall(function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/shadowt3ch/chat-test/main/ui.lua'))()
-end)
+print("GUI setup complete. Check in-game!")
