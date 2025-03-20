@@ -46,6 +46,7 @@ end
 -- Initial messages
 if yapping then
 	fadeText("Made By ShadowT3ch")
+	fadeText("Thank You Andrea Exploits For All Your Help!!")
 	if everyClipboard then 
 		everyClipboard(Gaze)
 		print("Clipboard set with tutorial link.")
@@ -57,27 +58,28 @@ end
 
 -- Bypass function
 local function bypass(input)
-	if not input:find(" ") then input = ">" .. input end
+	if not input:find(" ") then input = " " .. input end
 
 	local replacements = {
-		["rape"] = "尺卂ρ乇",
+		["rape"] = "гąıρэ",
 		["ass"] = "AƧƧ",
-		["fuck"] = "fυcк",
+		["fuck"] = "fк4",
 		["damn"] = "đамп",
 		["sex"] = "sεx",
-		["shit"] = "sнιт",
+		["shit"] = "şhıť",
 		["pornhub"] = "ρoяиhυв",
 		["porn"] = "ρoяи",
-		["bitch"] = "вιтch",
-		["nigga"] = "иιgga",
+		["bitch"] = "вгтсн",
+		["nigga"] = "ภเﻮﻮa",
 		["nigger"] = "иιggeя",
-		["dick"] = "đιcк",
+		["dick"] = "ďiсж",
 		["cock"] = "cσcк",
-		["gay"] = "gαy",
-		["pussy"] = "ρυssy",
+		["gay"] = "Ğауз",
+		["pussy"] = "ρυƧƧу",
 		["breast"] = "вяεasт",
-		["kkk"] = "Kƙƙ",
-		["hawk tuah"] = "нawктυaн"
+		["kkk"] = "🇰 🇰 🇰",
+		["hawk tuah"] = "нawктυaн",
+		["wtf"] = "штг"
 	}
 
 	local lowerInput = input:lower()
@@ -303,25 +305,30 @@ local function createTabContent(tabName, ContentFrame)
 		creditsText.Parent = mainFrame
 		creditsText.Size = UDim2.new(1, 0, 0.12, 0)
 		creditsText.Position = UDim2.new(0, 0, 0.46, 0)
-		creditsText.Text = "ShadowT3ch Development Team\nBeta Testers"
+		creditsText.Text = "ShadowT3ch Development Team\nAndrea Exploits\nBeta Testers"
 		creditsText.TextColor3 = Color3.fromRGB(200, 200, 200)
 		creditsText.Font = Enum.Font.Gotham
 		creditsText.TextSize = 14
 		creditsText.BackgroundTransparency = 1
 		creditsText.TextXAlignment = Enum.TextXAlignment.Center
 	elseif tabName == "PresetWords" then
-		local playerFrame = Instance.new("Frame")
-		playerFrame.Parent = ContentFrame
-		playerFrame.Size = UDim2.new(1, 0, 1, 0)
-		playerFrame.BackgroundTransparency = 1
+		local scrollFrame = Instance.new("ScrollingFrame")
+		scrollFrame.Parent = ContentFrame
+		scrollFrame.Size = UDim2.new(1, -10, 1, -10) -- Slightly smaller to fit scrollbar
+		scrollFrame.Position = UDim2.new(0, 5, 0, 5)
+		scrollFrame.BackgroundTransparency = 1
+		scrollFrame.ScrollBarThickness = 8
+		scrollFrame.ScrollBarImageColor3 = Color3.fromRGB(138, 43, 226)
+		scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0) -- Will be auto-adjusted
 
 		local bypassWords = {
-			"ыасk", "шiне", "Sтгu", "иiзза", "вгтсн", "нawk-тuан",
-			"Freaky as𝗴 boy 💀", "моммγ", "הrםק"
+			"гąıρэ", "AƧƧ", "fк4", "đамп", "sεx", "şhıť", "ρoяиhυв", "ρoяи", "вгтсн",
+			"ภเﻮﻮa", "иιggeя", "ďiсж", "cσcк", "Ğауз", "ρυƧƧу", "вяεasт", "🇰 🇰 🇰",
+			"нawктυaн", "штг"
 		}
 
 		local gridLayout = Instance.new("UIGridLayout")
-		gridLayout.Parent = playerFrame
+		gridLayout.Parent = scrollFrame
 		gridLayout.CellSize = UDim2.new(0, 200, 0, 30)
 		gridLayout.CellPadding = UDim2.new(0, 10, 0, 10)
 		gridLayout.FillDirection = Enum.FillDirection.Horizontal
@@ -336,7 +343,7 @@ local function createTabContent(tabName, ContentFrame)
 			button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			button.BackgroundTransparency = 1
 			button.Font = Enum.Font.Gotham
-			button.Parent = playerFrame
+			button.Parent = scrollFrame
 			button.TextStrokeTransparency = 0.8
 			button.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
@@ -357,7 +364,7 @@ local function createTabContent(tabName, ContentFrame)
 			end)
 
 			button.MouseButton1Click:Connect(function()
-				bypass(word) -- Use the bypass function instead of Chat service
+				bypass(word)
 				local originalSize = button.Size
 				game:GetService("TweenService"):Create(
 					button, 
@@ -372,6 +379,10 @@ local function createTabContent(tabName, ContentFrame)
 				):Play()
 			end)
 		end
+
+		-- Auto-adjust CanvasSize based on content
+		local rows = math.ceil(#bypassWords / 2) -- Assuming 2 columns based on 200px width and 500px frame
+		scrollFrame.CanvasSize = UDim2.new(0, 0, 0, rows * 40) -- 30px height + 10px padding per row
 	elseif tabName == "Say" then
 		local searchFrame = Instance.new("Frame")
 		searchFrame.Parent = ContentFrame
@@ -397,7 +408,7 @@ local function createTabContent(tabName, ContentFrame)
 		local function sendMessage()
 			local message = SearchBox.Text
 			if message ~= "" then
-				bypass(message) -- Use the bypass function
+				bypass(message)
 				SearchBox.Text = ""
 			end
 		end
