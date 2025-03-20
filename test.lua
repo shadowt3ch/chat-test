@@ -83,30 +83,14 @@ local function bypass(input)
 	}
 
 	local lowerInput = input:lower()
+	local result = lowerInput
+
+	-- Replace words from the table
 	for word, replacement in pairs(replacements) do
-		lowerInput = lowerInput:gsub(word, "{" .. replacement .. "}")
+		result = result:gsub(word, replacement)
 	end
 
-	local result = ""
-	local insideReplaced = false
-	for i = 1, #lowerInput do
-		local char = lowerInput:sub(i, i)
-		if char == "{" then
-			insideReplaced = true
-		elseif char == "}" then
-			insideReplaced = false
-		elseif insideReplaced then
-			result = result .. char
-		else
-			result = result .. char
-			if i % 3 == 0 and i < #lowerInput then
-				result = result .. "\u{200B}"
-			end
-		end
-	end
-
-	result = result:gsub("{", ""):gsub("}", "")
-
+	-- Send the message
 	local textChatService = game:GetService("TextChatService")
 	if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 		local channel = textChatService:FindFirstChild("TextChannels") and textChatService.TextChannels:FindFirstChild("RBXGeneral")
